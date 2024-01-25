@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.scss";
+
+import Tab from "./components/tabs/tabs";
+import Home from "./components/home/home";
+import About from "./components/about/about";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const tabIndex = 0;
+	return (
+		<div className="App">
+			<Tab tabindex={tabIndex} />
+			{tabIndex === 0 ? <Home /> : <About />}
+		</div>
+	);
 }
 
 export default App;
