@@ -1,16 +1,13 @@
 import styles from "./about.module.scss";
 
-// class About extends Component {
-// 	render(): React.ReactNode {
-// 		return <div className={styles.about}>Here is About</div>;
-// 	}
-// }
-
-// 函数组件
+/* 
+    函数组件
+*/
 function About({ showPageName = false }) {
 	const pageName = "About";
 	// 列表数据
-	const listItems = [<li>name: ldq</li>, <li>name: ldq2</li>];
+	const listItems = [<li key={0}>name: ldq</li>, <li key={1}>name: ldq2</li>];
+	// 返回 view
 	return (
 		<div className={styles.about}>
 			<p>Here is {showPageName ? pageName : "--"}</p>

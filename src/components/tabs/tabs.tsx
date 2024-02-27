@@ -1,30 +1,58 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 import styles from "./tabs.module.scss";
 
-// 定义props类型
-interface TabProps {
+// 类组件需要声明 - props和state类型
+interface Props {
+	tabindex: number;
+	setTabIndex: Dispatch<SetStateAction<number>>;
+}
+interface State {
 	tabindex: number;
 }
-class Tab extends React.Component<TabProps> {
-	constructor(props: any) {
+
+// list
+const listArr = [
+	{
+		name: "home",
+	},
+	{
+		name: "about",
+	},
+];
+
+// 类上定义类型
+class Tab extends React.Component<Props, State, {}> {
+	constructor(props: Props) {
 		super(props);
 		this.state = {
-			info: "ldq",
-			tabIndex: props.tabindex,
+			tabindex: props.tabindex,
 		};
 	}
+
+	changeTab(index: number) {
+		this.setState({
+			tabindex: index,
+		});
+		this.props.setTabIndex(index);
+	}
+
 	render(): React.ReactNode {
-		return (
-			<div className={styles.tabbar}>
-				<p className={this.props.tabindex === 0 ? styles.active : ""}>
-					home
+		const listItems = listArr.map((item, index) => {
+			return (
+				<p
+					key={index}
+					onClick={() => this.changeTab(index)}
+					className={
+						this.state.tabindex === index ? styles.active : ""
+					}
+				>
+					{item.name}
 				</p>
-				<p className={this.props.tabindex === 1 ? styles.active : ""}>
-					about
-				</p>
-			</div>
-		);
+			);
+		});
+
+		return <div className={styles.tabbar}>{listItems}</div>;
 	}
 }
 export default Tab;
